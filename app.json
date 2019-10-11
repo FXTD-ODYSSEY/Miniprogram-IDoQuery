@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/student/student",
+    "pages/index/index",
+    "pages/commit/commit",
+    "pages/employee/employee"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "一灯问卷",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}

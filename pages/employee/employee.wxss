@@ -1,0 +1,51 @@
+/* pages/employee/employee.wxss */
+
+page {
+  background: rgb(255, 192, 0);
+}
+
+.title {
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 72rpx;
+  font-weight: 30rpx;
+  color: white;
+  background: rgb(255, 225, 10);
+  border-top: 5rpx lightgray solid;
+  border-bottom: 5rpx lightgray solid;
+}
+
+.employee_form {
+  padding: 100rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.employee_form view {
+  border: 5rpx black solid;
+  background: white;
+  font-size: 45rpx;
+  margin: 50rpx 0;
+  padding: 25rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.employee_form view input {
+  text-align: center;
+  border: 5rpx black solid;
+  border-radius: 30rpx;
+  height: 100rpx;
+  color: white;
+}
+
+.employee_form button {
+  border: 5rpx black solid;
+}

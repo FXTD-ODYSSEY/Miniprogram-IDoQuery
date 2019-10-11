@@ -1,0 +1,27 @@
+<!--pages/student/student.wxml-->
+<view class="title">学生信息录入</view>
+<!-- 下拉框 -->
+
+<form class="student_form" bindsubmit='formSubmit'>
+
+  <view class="student_view">姓名：
+    <input class="blue" type='text' name="username" value='' placeholder='请输入您的姓名' placeholder-style="color:#d4d4d4;text-align: center;" catchtap='resetNameValidate' style="border: 5rpx {{name_validate}} solid;"/>
+  </view>
+  <view class="student_view" >专业：
+    <input class="purple" type='number' name="major" value='' placeholder='请输入您的专业名称' placeholder-style="color:#d4d4d4;text-align: center;" catchtap='resetMajorValidate' style="border: 5rpx {{major_validate}} solid;"/>
+  </view>
+
+  <view class="student_view">年级：
+    <view class='select_box'>
+      <view class='select orange' catchtap='selectTap'>
+        <input type='hidden' name="grade" value='{{selectData[index]}}' style="display:none"/>
+        <text class='select_text'>{{selectData[index]}}</text>
+      </view>
+      <view class='option_box orange' style='display:{{show_option}};height:{{show?(selectData.length>5?300:selectData.length*60):0}}rpx;'>
+        <text class='option' style='{{index==selectData.length-1&&"border:0;"}}' wx:for='{{selectData}}' wx:key='this' data-index='{{index}}' catchtap='optionTap'>{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <button form-type='submit'>确定</button>
+</form>
