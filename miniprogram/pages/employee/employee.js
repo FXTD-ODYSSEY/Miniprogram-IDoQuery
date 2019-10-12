@@ -38,9 +38,6 @@ Page({
   },
 
   formSubmit: function(e) {
-    // wx.navigateTo({
-    //   url: '../commit/commit'
-    // })
 
     let username = e.detail.value.username;
     let company = e.detail.value.company;
@@ -68,15 +65,14 @@ Page({
         appId: 'wxd947200f82267e58',
         path: "pages/wjxqList/wjxqList?activityId=46959595",
         success(res) {
-          // 完成问卷跳转到确认页面
-          wx.navigateTo({
-            url: '../commit/commit'
-          })
+          // 记录数据到数据库中
+
+         
         },
         fail(res) {
           // 完成问卷跳转到确认页面
           wx.showToast({
-            title: '报名失败 - 请允许跳转并完成问卷填写',
+            title: '问卷跳转失败',
             icon : 'none',
           })
         }

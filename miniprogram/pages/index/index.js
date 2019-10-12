@@ -11,20 +11,14 @@ Page({
 
   //页面跳转函数
   navigateToStudent: function() {
-    // 调用云函数 获取 openid 再跳转
-    this.getOpenID(e => {
       wx.navigateTo({
         url: '../student/student'
       })
-    })
   },
 
   navigateToEmployee: function() {
-    // 调用云函数 获取 openid 再跳转
-    this.getOpenID(e => {
-      wx.navigateTo({
-        url: '../employee/employee'
-      })
+    wx.navigateTo({
+      url: '../employee/employee'
     })
   },
 
@@ -53,6 +47,7 @@ Page({
     //   success: console.log,
     //   fail: console.error
     // })
+    
     // 查询数据库 判断用户是否已经填写问卷
     const db = wx.cloud.database()
     // 查询当前用户所有的 counters
@@ -87,27 +82,6 @@ Page({
     })
   },
 
-  getOpenID: function(callback) {
-    if (app.globalData.openid === undefined) {
-      wx.cloud.callFunction({
-        name: 'login',
-        data: {},
-        success: res => {
-          console.log('[云函数] [login] user openid: ', res.result.openid)
-          app.globalData.openid = res.result.openid
-          callback()
-        },
-        fail: err => {
-          console.error('[云函数] [login] 调用失败', err)
-          wx.showToast({
-            icon: 'none',
-            title: 'openID获取失败'
-          })
-        }
-      })
-    } else {
-      callback()
-    }
-  }
+  
 
 })

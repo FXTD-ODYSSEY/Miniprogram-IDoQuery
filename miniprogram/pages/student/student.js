@@ -1,4 +1,5 @@
 // pages/student/student.js
+const app = getApp()
 const validate = require('../../utils/validate.js')
 
 Page({
@@ -82,15 +83,61 @@ Page({
         appId: 'wxd947200f82267e58',
         path: "pages/wjxqList/wjxqList?activityId=46959014",
         success(res) {
-          // 完成问卷跳转到确认页面
-          wx.navigateTo({
-            url: '../commit/commit'
+          // 记录数据到数据库中
+
+          const db = wx.cloud.database()
+
+          // 查询当前用户是否已经入库
+          db.collection('guest').where({
+            _openid: app.globalData.openid
+          }).count().then(res => {
+            // 判断是否入库了
+            if (!res.total) {
+              db.collection('guest').count().then(res => {
+
+                db.collection('guest').add({
+                  data: {
+                    "index": res.total + 1,
+                    "name": username,
+                    "major": major,
+                    "grade": grade,
+                  },
+                  success: res => {
+                    console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+                  },
+                  fail: err => {
+                    console.error('[数据库] [新增记录] 失败：', err)
+                  }
+                })
+
+              })
+            } 
+            // else {
+            //   db.collection('guest').where({
+            //     _openid: app.globalData.openid
+            //   }).get({
+            //     success: res => {
+            //       db.collection('guest').doc(res.data[0]._id).update({
+            //         data: {
+            //           "name": username,
+            //           "major": major,
+            //           "grade": grade,
+            //         },
+            //       })
+            //     },
+            //     fail: err => {
+            //       console.error('[数据库] [查询记录] 失败：', err)
+            //     }
+            //   })
+            // }
+
           })
+
         },
         fail(res) {
           // 完成问卷跳转到确认页面
           wx.showToast({
-            title: '报名失败 - 请允许跳转并完成问卷填写',
+            title: '问卷跳转失败',
             icon: 'none',
           })
         }
@@ -104,6 +151,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    validate.getOpenID(id => {
+      this.setData({
+        openid: id
+      });
+    })
   },
 })
