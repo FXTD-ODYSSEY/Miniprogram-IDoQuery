@@ -1,0 +1,19 @@
+/* pages/commit/commit.wxss */
+
+page {
+  background: hsl(90, 80%, 50%);
+}
+
+.title {
+  height: 150rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 72rpx;
+  font-weight: bold;
+  color: white;
+  background: hsl(200, 90%, 50%);
+  border-top: 5rpx lightgray solid;
+  border-bottom: 5rpx lightgray solid;
+}

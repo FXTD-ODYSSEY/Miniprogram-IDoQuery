@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/student/student",
-    "pages/index/index",
+    "pages/employee/employee",
     "pages/commit/commit",
-    "pages/employee/employee"
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -11,5 +11,8 @@
     "navigationBarTitleText": "一灯问卷",
     "navigationBarTextStyle": "white"
   },
+  "navigateToMiniProgramAppIdList": [
+    "wxd947200f82267e58"
+  ],
   "sitemapLocation": "sitemap.json"
 }

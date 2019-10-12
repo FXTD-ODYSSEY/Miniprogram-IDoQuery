@@ -14,6 +14,17 @@
 
 <view class="title">身份选择</view>
 <view class="button_container">
-<button class="btn_green"  bindtap="navigateToStudent" > 学生 </button>
-<button class="btn_orange" bindtap="navigateToEmployee"> 在职 </button>
+
+  <button wx:if="{{!hasUserInfo && canIUse}}" 
+  open-type="getUserInfo" 
+  bindgetuserinfo="getUserInfo"
+  class="btn_blue"
+  > 
+  微信登录
+  </button>
+  <block wx:else>
+    <button class="btn_green" bindtap="navigateToStudent"> 学生 </button>
+    <button class="btn_orange" bindtap="navigateToEmployee"> 在职 </button>
+  </block>
+
 </view>

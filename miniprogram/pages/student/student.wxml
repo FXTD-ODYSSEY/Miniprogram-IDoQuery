@@ -23,5 +23,5 @@
     </view>
   </view>
 
-  <button form-type='submit'>确定</button>
+  <button form-type='submit'>报名</button>
 </form>

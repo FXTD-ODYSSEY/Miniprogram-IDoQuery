@@ -1,7 +1,7 @@
 /* pages/employee/employee.wxss */
 
 page {
-  background: rgb(255, 192, 0);
+  background: hsl(45, 90%, 50%);
 }
 
 .title {
@@ -11,9 +11,9 @@ page {
   justify-content: center;
   align-items: center;
   font-size: 72rpx;
-  font-weight: 30rpx;
+  font-weight: bold;
   color: white;
-  background: rgb(255, 225, 10);
+  background: hsl(50, 90%, 50%);
   border-top: 5rpx lightgray solid;
   border-bottom: 5rpx lightgray solid;
 }
@@ -30,8 +30,9 @@ page {
   border: 5rpx black solid;
   background: white;
   font-size: 45rpx;
+  font-weight: bold;
   margin: 50rpx 0;
-  padding: 25rpx;
+  padding: 15rpx;
   border-radius: 20rpx;
   display: flex;
   flex-direction: row;
@@ -39,6 +40,7 @@ page {
 }
 
 .employee_form view input {
+  font-weight: bold;
   text-align: center;
   border: 5rpx black solid;
   border-radius: 30rpx;
@@ -47,5 +49,6 @@ page {
 }
 
 .employee_form button {
+  font-weight: bold;
   border: 5rpx black solid;
 }

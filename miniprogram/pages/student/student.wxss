@@ -11,7 +11,7 @@ page{
   justify-content: center;
   align-items: center;
   font-size: 72rpx;
-  font-weight: 30rpx;
+  font-weight: bold;
   color: white;
   background: hsl(147, 100%, 45%);
   border-top: 5rpx lightgray solid;
@@ -27,11 +27,12 @@ page{
 }
 
 .student_form .student_view {
+  font-weight: bold;
   border: 5rpx black solid;
   background: white;
   font-size: 45rpx;
   margin: 50rpx 0;
-  padding: 25rpx;
+  padding: 15rpx;
   border-radius: 20rpx;
   display: flex;
   flex-direction: row;
@@ -39,6 +40,7 @@ page{
 }
 
 .student_form .student_view input {
+  font-weight: bold;
   text-align: center;
   border: 5rpx black solid;
   border-radius: 30rpx;
@@ -47,13 +49,14 @@ page{
 }
 
 .student_form button {
+  font-weight: bold;
   border: 5rpx black solid;
 }
 
 
 .select_box {
   position: relative;
-  width: 75%;
+  width: 80%;
 }
 
 .select {

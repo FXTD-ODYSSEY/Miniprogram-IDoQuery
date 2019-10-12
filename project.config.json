@@ -1,4 +1,6 @@
 {
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
 	"description": "项目配置文件",
 	"packOptions": {
 		"ignore": []
@@ -15,7 +17,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.8.3",
 	"appid": "wxbf942269cb294774",
-	"projectname": "miniprogram-1",
+	"projectname": "Miniprogram-IDoQuery",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

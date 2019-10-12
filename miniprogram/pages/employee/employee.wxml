@@ -1,0 +1,21 @@
+<!--pages/employee/employee.wxml-->
+
+
+<view class="title">在职信息录入</view>
+<form class="employee_form" bindsubmit='formSubmit'>
+
+  <view>姓名：
+    <input class="blue" type='text' name="username" placeholder='请输入您的姓名' placeholder-style="color:#d4d4d4;text-align: center;" catchtap='resetNameValidate' style="border: 5rpx {{name_validate}} solid;" />
+  </view>
+
+  <view>公司：
+    <input class="green" type='text' name="company" placeholder='请输入您的公司名称' placeholder-style="color:#d4d4d4;text-align: center;" catchtap='resetCompanyValidate' style="border: 5rpx {{company_validate}} solid;" />
+  </view>
+
+  <view>岗位：
+    <input class="purple" type='text' name="job" placeholder='请输入您的岗位名称' placeholder-style="color:#d4d4d4;text-align: center;" catchtap='resetJobValidate' style="border: 5rpx {{job_validate}} solid;" />
+  </view>
+
+  <button form-type='submit'>报名</button>
+
+</form>

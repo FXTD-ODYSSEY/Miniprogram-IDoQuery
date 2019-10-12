@@ -58,5 +58,6 @@
   font-size: 90rpx;
   font-weight: 30rpx;
   border: 5rpx black solid;
+  line-height: 100%;
 }
 
