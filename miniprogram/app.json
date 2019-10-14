@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/student/student",
-    "pages/employee/employee",
+    "pages/index/index",
     "pages/commit/commit",
-    "pages/index/index"
+    "pages/done/done",
+    "pages/student/student",
+    "pages/employee/employee"
   ],
   "window": {
     "backgroundTextStyle": "light",

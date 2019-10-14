@@ -1,4 +1,29 @@
 <!--pages/commit/commit.wxml-->
-<view class="title">报名成功</view>
+<!-- <view class="title">报名成功</view> -->
 
+<view class="info">报名成功
+  <text class="info_view blue">序号：{{index}}</text>
+  <text class="info_view green">时间：\n10月27日（周日）\n下午2：30 - 5：30</text>
+  <text class="info_view orange">地点：\n广东工业大学大学城校区\n教学4号楼202</text>
+</view>
 
+<view class="info">个人信息
+  <text class="info_view blue" wx:if="{{student}}">姓名：{{name}}
+  专业：{{major}}
+  年级：{{grade}}
+  </text>
+  <text class="info_view blue" wx:else>姓名：{{name}}
+  公司：{{company}}
+  岗位：{{job}}
+  </text>
+
+  <!-- <block wx:if="{{student}}">
+    <text class="info_view green">专业：{{major}}</text>
+    <text class="info_view orange">年级：{{grade}}</text>
+  </block>
+  <block wx:else>
+    <text class="info_view green">公司：{{company}}</text>
+    <text class="info_view orange">岗位：{{job}}</text>
+  </block> -->
+  <button class="modify" bindtap="modifyData">修改信息</button>
+</view>

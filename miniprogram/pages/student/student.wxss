@@ -56,7 +56,7 @@ page{
 
 .select_box {
   position: relative;
-  width: 80%;
+  width: 75%;
 }
 
 .select {

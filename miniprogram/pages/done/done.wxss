@@ -1,0 +1,13 @@
+/* pages/done/done.wxss */
+
+.info{
+  font-size: 100rpx;
+  font-weight: bold;
+  background: royalblue;
+  border: 5px black solid;
+  border-radius: 30rpx;
+  margin: 300rpx auto;
+  padding: 20rpx;
+  width: 80%;
+  height: 100%;
+}

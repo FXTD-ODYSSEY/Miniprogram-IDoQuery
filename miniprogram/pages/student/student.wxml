@@ -8,7 +8,7 @@
     <input class="blue" type='text' name="username" value='' placeholder='请输入您的姓名' placeholder-style="color:#d4d4d4;text-align: center;" catchtap='resetNameValidate' style="border: 5rpx {{name_validate}} solid;"/>
   </view>
   <view class="student_view" >专业：
-    <input class="purple" type='number' name="major" value='' placeholder='请输入您的专业名称' placeholder-style="color:#d4d4d4;text-align: center;" catchtap='resetMajorValidate' style="border: 5rpx {{major_validate}} solid;"/>
+    <input class="purple" type='text' name="major" value='' placeholder='请输入您的专业名称' placeholder-style="color:#d4d4d4;text-align: center;" catchtap='resetMajorValidate' style="border: 5rpx {{major_validate}} solid;"/>
   </view>
 
   <view class="student_view">年级：
@@ -23,5 +23,5 @@
     </view>
   </view>
 
-  <button form-type='submit'>填写问卷</button>
+  <button form-type='submit'>{{query_btn}}</button>
 </form>

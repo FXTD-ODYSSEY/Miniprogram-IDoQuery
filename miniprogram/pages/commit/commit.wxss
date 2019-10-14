@@ -1,7 +1,7 @@
 /* pages/commit/commit.wxss */
 
 page {
-  background: hsl(90, 80%, 50%);
+  background: hsl(90, 50%, 50%);
 }
 
 .title {
@@ -13,7 +13,46 @@ page {
   font-size: 72rpx;
   font-weight: bold;
   color: white;
-  background: hsl(200, 90%, 50%);
+  background: hsl(90, 60%, 50%);
   border-top: 5rpx lightgray solid;
   border-bottom: 5rpx lightgray solid;
+}
+
+
+
+.info {
+  margin: 30rpx auto;
+  width: 80%;
+  padding: 10rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: coral;
+  border: 5rpx black solid;
+  border-radius: 30rpx;
+  font-size: 45rpx;
+  font-weight: bold;
+}
+
+.info .info_view {
+  width: 100%;
+  border: 10rpx black solid;
+  /* background: white; */
+  margin: 5rpx 0;
+  padding: 15rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.modify {
+  text-align: center;
+  border: 5rpx black solid;
+  border-radius: 30rpx;
+  height: 70rpx;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }

@@ -16,6 +16,6 @@
     <input class="purple" type='text' name="job" placeholder='请输入您的岗位名称' placeholder-style="color:#d4d4d4;text-align: center;" catchtap='resetJobValidate' style="border: 5rpx {{job_validate}} solid;" />
   </view>
 
-  <button form-type='submit'>填写问卷</button>
+  <button form-type='submit'>{{query_btn}}</button>
 
 </form>

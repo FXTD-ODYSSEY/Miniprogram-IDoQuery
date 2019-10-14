@@ -5,62 +5,66 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    "index": 0,
+    "name": "",
+    "major": "",
+    "grade": "",
+    "company": "",
+    "job": "",
+    "student": true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+
+    const db = wx.cloud.database()
+    // 查询当前用户所有的 counters
+    db.collection('guest').where({
+      _openid: this.data.openid
+    }).get({
+      success: res => {
+        let data = res.data[0];
+        if (data.student) {
+          this.setData({
+            "index": data.index,
+            "name": data.name,
+            "major": data.major,
+            "grade": data.grade,
+          })
+        } else {
+          this.setData({
+            "student": false,
+            "name": data.name,
+            "index": data.index,
+            "company": data.company,
+            "job": data.job,
+          })
+        }
+        console.log('[数据库] [查询记录] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
 
   },
+  modifyData: function() {
+    if (this.data.student) {
+      wx.navigateTo({
+        url: '../student/student?modify=true'
+      })
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+    } else {
+      wx.navigateTo({
+        url: '../employee/employee?modify=true',
+      })
+    }
 
   }
 })

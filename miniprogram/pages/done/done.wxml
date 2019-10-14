@@ -1,0 +1,5 @@
+<!--pages/done/done.wxml-->
+<view class="container info">
+  <text>加载中...</text>
+  <text>请稍等片刻</text>
+</view>

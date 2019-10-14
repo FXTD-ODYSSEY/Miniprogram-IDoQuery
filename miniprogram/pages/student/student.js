@@ -1,6 +1,7 @@
 // pages/student/student.js
 const app = getApp()
 const validate = require('../../utils/validate.js')
+const db = wx.cloud.database()
 
 Page({
 
@@ -15,6 +16,32 @@ Page({
 
     name_validate: "black",
     major_validate: "black",
+    modify: false,
+    query_btn: "填写问卷",
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    validate.getOpenID(id => {
+      this.setData({
+        openid: id
+      });
+    })
+
+    if (options.modify == "true") {
+      this.setData({
+        modify: true,
+        query_btn: "提交修改",
+      });
+    } else {
+      this.setData({
+        modify: false,
+        query_btn: "填写问卷",
+      });
+
+    }
+
   },
 
   // 点击下拉显示框
@@ -79,82 +106,109 @@ Page({
 
     if (check1 && check2) {
 
-      wx.navigateToMiniProgram({
-        appId: 'wxd947200f82267e58',
-        path: "pages/wjxqList/wjxqList?activityId=46959014",
-        success(res) {
-          // 记录数据到数据库中
+      if (this.data.modify) {
+        // 修改
+        db.collection('guest').where({
+          _openid: app.globalData.openid
+        }).get({
+          success: res => {
+            db.collection('guest').doc(res.data[0]._id).update({
+              data: {
+                "name": username,
+                "major": major,
+                "grade": grade,
+              },
+              success: res => {
+                wx.reLaunch({
+                  url: '../commit/commit'
+                })
+              }
+            })
+          },
+          fail: err => {
+            console.error('[数据库] [查询记录] 失败：', err)
+          }
+        })
 
-          const db = wx.cloud.database()
+      } else {
 
-          // 查询当前用户是否已经入库
-          db.collection('guest').where({
-            _openid: app.globalData.openid
-          }).count().then(res => {
-            // 判断是否入库了
-            if (!res.total) {
-              db.collection('guest').count().then(res => {
+        wx.navigateToMiniProgram({
+          appId: 'wxd947200f82267e58',
+          path: "pages/wjxqList/wjxqList?activityId=46959014",
+          success(res) {
 
-                db.collection('guest').add({
-                  data: {
-                    "index": res.total + 1,
-                    "name": username,
-                    "major": major,
-                    "grade": grade,
-                  },
+            // 查询当前用户是否已经入库
+            db.collection('guest').where({
+              _openid: app.globalData.openid
+            }).count().then(res => {
+              // 判断是否入库了
+              if (!res.total) {
+                db.collection('guest').count().then(res => {
+
+                  db.collection('guest').add({
+                    data: {
+                      "index": res.total + 1,
+                      "name": username,
+                      "major": major,
+                      "grade": grade,
+                      "student": true,
+                      "query": false,
+                    },
+                    success: res => {
+                      console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+
+                    },
+                    fail: err => {
+                      console.error('[数据库] [新增记录] 失败：', err)
+                    }
+                  })
+
+                })
+              }
+              // NOTE 已经存在则忽略
+              else {
+                db.collection('guest').where({
+                  _openid: app.globalData.openid
+                }).get({
                   success: res => {
-                    console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+                    db.collection('guest').doc(res.data[0]._id).update({
+                      data: {
+                        "name": username,
+                        "major": major,
+                        "grade": grade,
+                      },
+                    })
                   },
                   fail: err => {
-                    console.error('[数据库] [新增记录] 失败：', err)
+                    console.error('[数据库] [查询记录] 失败：', err)
                   }
                 })
-
+              }
+              // 回到首页
+              wx.navigateBack({
+                delta: 2222,
+                complete: res => {
+                  wx.redirectTo({
+                    url: '../index/index',
+                  })
+                }
               })
-            } 
-            // else {
-            //   db.collection('guest').where({
-            //     _openid: app.globalData.openid
-            //   }).get({
-            //     success: res => {
-            //       db.collection('guest').doc(res.data[0]._id).update({
-            //         data: {
-            //           "name": username,
-            //           "major": major,
-            //           "grade": grade,
-            //         },
-            //       })
-            //     },
-            //     fail: err => {
-            //       console.error('[数据库] [查询记录] 失败：', err)
-            //     }
-            //   })
-            // }
 
-          })
+            })
 
-        },
-        fail(res) {
-          // 完成问卷跳转到确认页面
-          wx.showToast({
-            title: '问卷跳转失败',
-            icon: 'none',
-          })
-        }
-      })
+          },
+          fail(res) {
+            // 完成问卷跳转到确认页面
+            wx.showToast({
+              title: '问卷跳转失败',
+              icon: 'none',
+            })
+          }
+        })
+      }
 
     }
 
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    validate.getOpenID(id => {
-      this.setData({
-        openid: id
-      });
-    })
-  },
 })

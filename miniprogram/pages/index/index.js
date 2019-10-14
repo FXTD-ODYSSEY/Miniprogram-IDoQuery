@@ -5,15 +5,17 @@ const app = getApp()
 Page({
   data: {
     userInfo: {},
+    query: true,
+    student: true,
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
   //页面跳转函数
   navigateToStudent: function() {
-      wx.navigateTo({
-        url: '../student/student'
-      })
+    wx.navigateTo({
+      url: '../student/student'
+    })
   },
 
   navigateToEmployee: function() {
@@ -42,29 +44,34 @@ Page({
       }
     }
 
-    // const db = wx.cloud.database()
-    // db.collection('test').get({
-    //   success: console.log,
-    //   fail: console.error
-    // })
-    
     // 查询数据库 判断用户是否已经填写问卷
     const db = wx.cloud.database()
     // 查询当前用户所有的 counters
-    db.collection('counters').where({
+    db.collection('guest').where({
       _openid: app.globalData.openid
     }).get({
       success: res => {
-        this.setData({
-          queryResult: JSON.stringify(res.data, null, 2)
-        })
+        if (res.data.length) {
+          let data = res.data[0]
+          this.setData({
+            query: data.query,
+            student:data.student
+          })
+          // 已填写问卷 跳转到 commit 界面
+          if (data.query){
+            wx.reLaunch({
+              url: '../commit/commit'
+            })
+          }
+
+        }
         console.log('[数据库] [查询记录] 成功: ', res)
       },
       fail: err => {
-        // wx.showToast({
-        //   icon: 'none',
-        //   title: '查询记录失败'
-        // })
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败 - 请重试'
+        })
         console.error('[数据库] [查询记录] 失败：', err)
       }
     })
@@ -82,6 +89,25 @@ Page({
     })
   },
 
-  
+  writeQuery:function(e){
+
+    let path = this.data.student ? "pages/wjxqList/wjxqList?activityId=46959014" : "pages/wjxqList/wjxqList?activityId=46959595"
+    wx.navigateToMiniProgram({
+      appId: 'wxd947200f82267e58',
+      path: path,
+      success(res) {
+
+      },
+      fail(res) {
+        // 完成问卷跳转到确认页面
+        wx.showToast({
+          title: '问卷跳转失败',
+          icon: 'none',
+        })
+      }
+    })
+  }
+
+
 
 })
