@@ -1,4 +1,5 @@
 // pages/commit/commit.js
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -12,6 +13,8 @@ Page({
     "company": "",
     "job": "",
     "student": true,
+    "time": "",
+    "position": "",
   },
 
   /**
@@ -19,7 +22,16 @@ Page({
    */
   onLoad: function(options) {
 
-    const db = wx.cloud.database()
+    // 获取时间地点
+    db.collection('message').doc("1b4b2ebd-f199-4b8b-82d2-9c77c636a6c4").get({
+      success: res => {
+        this.setData({
+          time: res.data.time.replace(/\\n/gi,"\n"),
+          position: res.data.position.replace(/\\n/gi, "\n"),
+        })
+      }
+    })
+
     // 查询当前用户所有的 counters
     db.collection('guest').where({
       _openid: this.data.openid

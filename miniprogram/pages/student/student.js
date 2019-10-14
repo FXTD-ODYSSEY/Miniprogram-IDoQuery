@@ -135,7 +135,7 @@ Page({
         wx.navigateToMiniProgram({
           appId: 'wxd947200f82267e58',
           path: "pages/wjxqList/wjxqList?activityId=46959014",
-          success(res) {
+          success : (res) =>{
 
             // 查询当前用户是否已经入库
             db.collection('guest').where({
@@ -143,11 +143,11 @@ Page({
             }).count().then(res => {
               // 判断是否入库了
               if (!res.total) {
-                db.collection('guest').count().then(res => {
+                db.collection('student').count().then(res => {
 
                   db.collection('guest').add({
                     data: {
-                      "index": res.total + 1,
+                      "index": "A" + (res.total + 1),
                       "name": username,
                       "major": major,
                       "grade": grade,
@@ -157,6 +157,19 @@ Page({
                     success: res => {
                       console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
 
+                    },
+                    fail: err => {
+                      console.error('[数据库] [新增记录] 失败：', err)
+                    }
+                  })
+
+                  db.collection('student').add({
+                    data:{
+
+                    },
+                    success: res => {
+                      console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+                      this.goBackHome()
                     },
                     fail: err => {
                       console.error('[数据库] [新增记录] 失败：', err)
@@ -177,6 +190,7 @@ Page({
                         "major": major,
                         "grade": grade,
                       },
+                      success:this.goBackHome
                     })
                   },
                   fail: err => {
@@ -184,15 +198,7 @@ Page({
                   }
                 })
               }
-              // 回到首页
-              wx.navigateBack({
-                delta: 2222,
-                complete: res => {
-                  wx.redirectTo({
-                    url: '../index/index',
-                  })
-                }
-              })
+              
 
             })
 
@@ -210,5 +216,17 @@ Page({
     }
 
   },
+
+  goBackHome: function(){
+    // 回到首页
+    wx.navigateBack({
+      delta: 2222,
+      complete: res => {
+        wx.redirectTo({
+          url: '../index/index',
+        })
+      }
+    })
+  }
 
 })

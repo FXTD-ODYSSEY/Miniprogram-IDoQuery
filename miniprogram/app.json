@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/commit/commit",
     "pages/done/done",
+    "pages/commit/commit",
     "pages/student/student",
     "pages/employee/employee"
   ],
